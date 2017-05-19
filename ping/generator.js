@@ -18,6 +18,8 @@ export default function Generator(ast) {
                     text += createCallExpression(node.attr.object, node.attr.method, node.arguments);
                 }
             }
+
+            text += '\n';
         }
 
         return text;
