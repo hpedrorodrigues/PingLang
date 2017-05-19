@@ -1,6 +1,5 @@
 import Ping from '../ping/compiler';
 const fs = require('fs');
-const path = require('path');
 
 fs.readFile('./sample.ping', 'utf8', function (error, data) {
     if (error) {
