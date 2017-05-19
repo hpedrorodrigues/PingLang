@@ -10,7 +10,7 @@ const Ping = {
     transformer: Transformer,
     generator: Generator,
     compile: function (code) {
-        return this.generator(this.transformer(this.parser(this.lexer(code))))
+        return this.generator(this.transformer(this.parser(this.lexer(code))));
     }
 };
 

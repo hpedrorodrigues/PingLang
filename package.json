@@ -5,9 +5,11 @@
   "main": "ping.js",
   "scripts": {
     "build": "rollup ping/compiler.js --name ping --format umd --output dist/ping.js",
-    "build-sample": "rollup sample/sample.js --name sample --format umd --output dist/sample.js; cp sample/sample.ping dist/",
+    "build-sample": "rollup sample/sample.js -n sample -f umd -o dist/sample.js; cp sample/sample.ping dist/",
     "clean": "rm -rf ./dist",
-    "sample": "npm run clean && npm run build-sample && cd dist && node sample.js && cd .."
+    "sample": "npm run build-sample; cd dist; node sample.js; cd ..",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill",
+    "all": "npm test & npm run clean & npm run build & npm run sample"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,13 @@
     "url": "https://github.com/hpedrorodrigues/PingLang/issues"
   },
   "homepage": "https://github.com/hpedrorodrigues/PingLang#readme",
-  "dependencies": {
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.4.1",
     "rollup": "^0.41.6"
   }
 }
