@@ -16,11 +16,14 @@ export default function Transformer(ast) {
 
                 if (node.name === 'print') {
                     let newNode = {
-                        object: 'console',
+                        attr: {
+                            object: 'console',
+                            method: 'log'
+                        },
                         arguments: node.arguments.join(' ')
                     };
 
-                    AST.push(newNode);
+                    AST.body.push(newNode);
                 }
             }
         }
