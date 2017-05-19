@@ -4,6 +4,8 @@ A very small language project to help me to learn more about Abstract Syntax Tre
 
 **This compiler is WIP**.
 
+A example of this language specification can be found [here](./sample/sample.ping). 
+
 ## Supported keywords
 
 List of commands supported and planning to implement:
