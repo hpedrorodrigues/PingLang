@@ -4,9 +4,9 @@ import Transformer from './../ping/transformer';
 
 describe('Transformer', function () {
 
-    describe('#generateJSAST()', function () {
+    describe('#generateJS_AST()', function () {
 
-        it('should return a js ast when a simple line with comment tokens are given', function () {
+        it('should return a js ast when a ping ast representing a line with comment is given', function () {
             let expectedJS_AST = {
                 type: 'javascript',
                 body: [
@@ -28,7 +28,7 @@ describe('Transformer', function () {
             expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
-        it('should return a js ast when a simple line with comments with text and numbers are given', function () {
+        it('should return a js ast when a ping ast representing simple line with comments with text and numbers is given', function () {
             let expectedJS_AST = {
                 type: 'javascript',
                 body: [
@@ -46,7 +46,7 @@ describe('Transformer', function () {
             expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
-        it('should return a js ast when a simple line with log to stdout with only text is given', function () {
+        it('should return a js ast when a ping ast representing simple line with log to stdout with only text is given', function () {
             let expectedJS_AST = {
                 type: 'javascript',
                 body: [
@@ -64,7 +64,7 @@ describe('Transformer', function () {
             expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
-        it('should return a js ast when logs and comments are given in multiple lines', function () {
+        it('should return a js ast when a ping ast representing logs and comments are given in multiple lines', function () {
             let expectedJS_AST = {
                 type: 'javascript',
                 body: [

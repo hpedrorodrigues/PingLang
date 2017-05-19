@@ -28,7 +28,7 @@ describe('Parser', function () {
 
         });
 
-        it('should return an ast when a simple line with comments with text and numbers are given', function () {
+        it('should return an ast when a simple line with comments with text and numbers tokens are given', function () {
             let expectedAST = {
                 type: 'ping',
                 body: [
@@ -45,7 +45,7 @@ describe('Parser', function () {
             expect(expectedAST).to.deep.equal(Parser(tokens));
         });
 
-        it('should return an ast when a simple line with log to stdout with only text is given', function () {
+        it('should return an ast when a simple line with log to stdout with only text tokens are given', function () {
             let expectedAST = {
                 type: 'ping',
                 body: [
@@ -64,7 +64,7 @@ describe('Parser', function () {
             expect(expectedAST).to.deep.equal(Parser(tokens));
         });
 
-        it('should return an ast when logs and comments are given in multiple lines', function () {
+        it('should return an ast when logs and comments tokens are given in multiple lines', function () {
             let expectedAST = {
                 type: 'ping',
                 body: [
