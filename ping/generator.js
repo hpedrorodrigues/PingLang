@@ -2,14 +2,10 @@ export default function Generator(ast) {
 
     this.ast = ast;
 
-    this.traverseAST = function () {
-        const createCallExpression = (object, method, args) => {
-            return object + '.' + method + '(' + args + ');';
-        };
+    this.traverseAST = () => {
+        const createCallExpression = (object, method, args) => object + '.' + method + '(' + args + ');';
 
-        const createCommentExpression = (args) => {
-            return '// ' + args;
-        };
+        const createCommentExpression = (args) => '// ' + args;
 
         let text = '';
 

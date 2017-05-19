@@ -15,10 +15,8 @@ export default function Lexer(code) {
         }
     };
 
-    this._getTokens = function () {
-        const prepare = (key) => {
-            return ' ' + key + ' ';
-        };
+    this._getTokens = () => {
+        const prepare = (key) => ' ' + key + ' ';
 
         return this.code
             .replace(/[\n\r]/g, prepare(this.langTokens.special.NEW_LINE))
@@ -29,7 +27,7 @@ export default function Lexer(code) {
             .split(/[\t\f\v ]+/);
     };
 
-    this.tokenizer = function () {
+    this.tokenizer = () => {
         const _tokens = this._getTokens(), tokens = [];
 
         for (let i = 0; i < _tokens.length; i++) {
@@ -45,11 +43,11 @@ export default function Lexer(code) {
                 } else if (token === this.langTokens.special.RIGHT_PARENTHESIS) {
                     tokens.push({type: 'right_parenthesis'});
                 } else if (token === this.langTokens.special.DOUBLE_QUOTES) {
-                    tokens.push({type: 'double_quotes'});
+                    tokens.push({type: 'double_quotes', value: "\""});
                 } else if (token === this.langTokens.special.COMMENT) {
                     tokens.push({type: 'comment'});
                 } else if (token === this.langTokens.keywords.PRINT) {
-                    tokens.push({type: 'keyword', value: 'print'});
+                    tokens.push({type: 'keyword', label: 'print', value: this.langTokens.keywords.PRINT});
                 } else if (typeof token === 'string' || token instanceof String || token !== '') {
                     tokens.push({type: 'word', value: token});
                 } else {

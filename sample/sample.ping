@@ -13,3 +13,6 @@ show "Simple Message 5"
 # Just a comment 5
 
 show 7
+
+show "Simple Message 6" # Just a comment 6
+# Just a comment 7 show "Simple Message 7"

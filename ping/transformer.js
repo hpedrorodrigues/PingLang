@@ -2,7 +2,7 @@ export default function Transformer(ast) {
 
     this.ast = ast;
 
-    this.generateJSAST = function () {
+    this.generateJSAST = () => {
 
         let AST = {
             type: 'javascript',
@@ -14,7 +14,7 @@ export default function Transformer(ast) {
 
             if (node.type === 'CallExpression') {
 
-                if (node.name === 'print') {
+                if (node.label === 'print') {
                     let newNode = {
                         attr: {
                             type: 'log',

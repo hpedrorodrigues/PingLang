@@ -2,7 +2,7 @@ export default function Parser(tokens) {
 
     this.tokens = tokens;
 
-    this.generateAST = function () {
+    this.generateAST = () => {
         const findCommentArguments = () => {
             let token = this.tokens.shift(), args = [];
 
@@ -11,7 +11,24 @@ export default function Parser(tokens) {
                 token = this.tokens.shift();
             }
 
-            return args.join(' ');
+            return args.reduce((result, arg, index, arr) => {
+                if (arg === '"') {
+                    return {
+                        value: result.value + '"',
+                        open_quotes: true
+                    };
+                } else if (result.open_quotes && arr[index + 1] === '"') {
+                    return {
+                        value: result.value + arg,
+                        open_quotes: false
+                    };
+                } else {
+                    return {
+                        value: result.value + arg + " ",
+                        open_quotes: result.open_quotes
+                    };
+                }
+            }, {value: ''}).value;
         };
 
         const findStringArguments = (keyword) => {
@@ -46,10 +63,10 @@ export default function Parser(tokens) {
             let token = this.tokens.shift();
 
             if (token.type === 'keyword') {
-                if (token.value === 'print') {
+                if (token.label === 'print') {
                     let expression = {
                         type: 'CallExpression',
-                        name: 'print',
+                        label: 'print',
                         arguments: findStringArguments(token.value)
                     };
 
@@ -60,7 +77,7 @@ export default function Parser(tokens) {
             } else if (token.type === 'comment') {
                 let expression = {
                     type: 'CommentExpression',
-                    name: '#',
+                    label: '#',
                     arguments: findCommentArguments()
                 };
 
