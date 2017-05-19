@@ -1,15 +1,13 @@
 export default function Generator(ast) {
 
-    this.ast = ast;
-
-    this.traverseAST = () => {
+    const traverseAST = () => {
         const createCallExpression = (object, method, args) => `${object}.${method}(${args});`;
         const createCommentExpression = (args) => `// ${args}`;
 
         let text = '';
 
-        while (this.ast.body.length) {
-            let node = this.ast.body.shift();
+        while (ast.body.length) {
+            let node = ast.body.shift();
 
             if (node.attr.type === 'log') {
 
@@ -30,5 +28,5 @@ export default function Generator(ast) {
         return text;
     };
 
-    return this.traverseAST();
+    return traverseAST();
 }

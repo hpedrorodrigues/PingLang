@@ -1,11 +1,19 @@
+import {describe, it} from 'mocha';
+import {expect} from 'chai';
 import Transformer from './../ping/transformer';
-import Chai from 'chai';
 
 describe('Transformer', function () {
 
     describe('#generateJSAST()', function () {
 
         it('should return a js ast when a simple line with comment tokens are given', function () {
+            let expectedJS_AST = {
+                type: 'javascript',
+                body: [
+                    {attr: {type: 'comment', label: 'one_line'}, arguments: 'Test Test '}
+                ]
+            };
+
             let ast = {
                 type: 'ping',
                 body: [
@@ -17,17 +25,17 @@ describe('Transformer', function () {
                 ]
             };
 
-            let jsAST = new Transformer(ast);
-
-            Chai.expect(jsAST).to.deep.equal({
-                type: 'javascript',
-                body: [
-                    {attr: {type: 'comment', label: 'one_line'}, arguments: 'Test Test '}
-                ]
-            });
+            expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
         it('should return a js ast when a simple line with comments with text and numbers are given', function () {
+            let expectedJS_AST = {
+                type: 'javascript',
+                body: [
+                    {attr: {type: 'comment', label: 'one_line'}, arguments: 'Test 1 '}
+                ]
+            };
+
             let ast = {
                 type: 'ping',
                 body: [
@@ -35,17 +43,17 @@ describe('Transformer', function () {
                 ]
             };
 
-            let jsAST = new Transformer(ast);
-
-            Chai.expect(jsAST).to.deep.equal({
-                type: 'javascript',
-                body: [
-                    {attr: {type: 'comment', label: 'one_line'}, arguments: 'Test 1 '}
-                ]
-            });
+            expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
         it('should return a js ast when a simple line with log to stdout with only text is given', function () {
+            let expectedJS_AST = {
+                type: 'javascript',
+                body: [
+                    {attr: {type: 'log', label: 'log'}, arguments: 'Test Test'}
+                ]
+            };
+
             let ast = {
                 type: 'ping',
                 body: [
@@ -53,17 +61,17 @@ describe('Transformer', function () {
                 ]
             };
 
-            let jsAST = new Transformer(ast);
-
-            Chai.expect(jsAST).to.deep.equal({
-                type: 'javascript',
-                body: [
-                    {attr: {type: 'log', label: 'log'}, arguments: 'Test Test'}
-                ]
-            });
+            expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
 
         it('should return a js ast when logs and comments are given in multiple lines', function () {
+            let expectedJS_AST = {
+                type: 'javascript',
+                body: [
+                    {attr: {type: 'log', label: 'log'}, arguments: 'Test Test'}
+                ]
+            };
+
             let ast = {
                 type: 'ping',
                 body: [
@@ -71,14 +79,7 @@ describe('Transformer', function () {
                 ]
             };
 
-            let jsAST = new Transformer(ast);
-
-            Chai.expect(jsAST).to.deep.equal({
-                type: 'javascript',
-                body: [
-                    {attr: {type: 'log', label: 'log'}, arguments: 'Test Test'}
-                ]
-            });
+            expect(expectedJS_AST).to.deep.equal(Transformer(ast));
         });
     });
 });

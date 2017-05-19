@@ -1,14 +1,12 @@
 export default function Parser(tokens) {
 
-    this.tokens = tokens;
-
-    this.generateAST = () => {
+    const generateAST = () => {
         const findCommentArguments = () => {
-            let token = this.tokens.shift(), args = [];
+            let token = tokens.shift(), args = [];
 
             while (token && token.type !== 'new_line') {
                 args.push(token.value);
-                token = this.tokens.shift();
+                token = tokens.shift();
             }
 
             return args.reduce((result, arg, index, arr) => {
@@ -32,7 +30,7 @@ export default function Parser(tokens) {
         };
 
         const findStringArguments = (keyword) => {
-            let token = this.tokens.shift();
+            let token = tokens.shift();
 
             if (token.type === 'number') {
                 return token.value;
@@ -44,11 +42,11 @@ export default function Parser(tokens) {
                 throw new Error(`Only strings and numbers are supported by "${keyword}" method!'`);
             }
 
-            token = this.tokens.shift();
+            token = tokens.shift();
 
             while (token.type !== 'double_quotes') {
                 args.push(token.value);
-                token = this.tokens.shift();
+                token = tokens.shift();
             }
 
             return args.join(' ');
@@ -59,8 +57,8 @@ export default function Parser(tokens) {
             body: []
         };
 
-        while (this.tokens.length) {
-            let token = this.tokens.shift();
+        while (tokens.length) {
+            let token = tokens.shift();
 
             if (token.type === 'keyword') {
                 if (token.label === 'print') {
@@ -92,5 +90,5 @@ export default function Parser(tokens) {
         return AST;
     };
 
-    return this.generateAST();
+    return generateAST();
 }

@@ -1,8 +1,6 @@
 export default function Lexer(code) {
 
-    this.code = code;
-
-    this.langTokens = {
+    const langTokens = {
         special: {
             NEW_LINE: '*nl*',
             LEFT_PARENTHESIS: '*lp*',
@@ -15,20 +13,20 @@ export default function Lexer(code) {
         }
     };
 
-    this._getTokens = () => {
+    const _getTokens = () => {
         const prepare = (key) => ` ${key} `;
 
-        return this.code
-            .replace(/[\n\r]/g, prepare(this.langTokens.special.NEW_LINE))
-            .replace(/\(/g, prepare(this.langTokens.special.LEFT_PARENTHESIS))
-            .replace(/\)/g, prepare(this.langTokens.special.RIGHT_PARENTHESIS))
-            .replace(/\"/g, prepare(this.langTokens.special.DOUBLE_QUOTES))
-            .replace(/#/g, prepare(this.langTokens.special.COMMENT))
+        return code
+            .replace(/[\n\r]/g, prepare(langTokens.special.NEW_LINE))
+            .replace(/\(/g, prepare(langTokens.special.LEFT_PARENTHESIS))
+            .replace(/\)/g, prepare(langTokens.special.RIGHT_PARENTHESIS))
+            .replace(/\"/g, prepare(langTokens.special.DOUBLE_QUOTES))
+            .replace(/#/g, prepare(langTokens.special.COMMENT))
             .split(/[\t\f\v ]+/);
     };
 
-    this.tokenizer = () => {
-        const _tokens = this._getTokens(), tokens = [];
+    const tokenizer = () => {
+        const _tokens = _getTokens(), tokens = [];
 
         for (let i = 0; i < _tokens.length; i++) {
             const token = _tokens[i];
@@ -36,18 +34,18 @@ export default function Lexer(code) {
             if (token.length <= 0) {
                 // ignore
             } else if (isNaN(token)) {
-                if (token === this.langTokens.special.NEW_LINE) {
+                if (token === langTokens.special.NEW_LINE) {
                     tokens.push({type: 'new_line'});
-                } else if (token === this.langTokens.special.LEFT_PARENTHESIS) {
+                } else if (token === langTokens.special.LEFT_PARENTHESIS) {
                     tokens.push({type: 'left_parenthesis'});
-                } else if (token === this.langTokens.special.RIGHT_PARENTHESIS) {
+                } else if (token === langTokens.special.RIGHT_PARENTHESIS) {
                     tokens.push({type: 'right_parenthesis'});
-                } else if (token === this.langTokens.special.DOUBLE_QUOTES) {
+                } else if (token === langTokens.special.DOUBLE_QUOTES) {
                     tokens.push({type: 'double_quotes', value: "\""});
-                } else if (token === this.langTokens.special.COMMENT) {
+                } else if (token === langTokens.special.COMMENT) {
                     tokens.push({type: 'comment'});
-                } else if (token === this.langTokens.keywords.PRINT) {
-                    tokens.push({type: 'keyword', label: 'print', value: this.langTokens.keywords.PRINT});
+                } else if (token === langTokens.keywords.PRINT) {
+                    tokens.push({type: 'keyword', label: 'print', value: langTokens.keywords.PRINT});
                 } else if (typeof token === 'string' || token instanceof String || token !== '') {
                     tokens.push({type: 'word', value: token});
                 } else {
@@ -61,5 +59,5 @@ export default function Lexer(code) {
         return tokens;
     };
 
-    return this.tokenizer();
+    return tokenizer();
 }

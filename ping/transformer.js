@@ -1,16 +1,14 @@
 export default function Transformer(ast) {
 
-    this.ast = ast;
-
-    this.generateJSAST = () => {
+    const generateJSAST = () => {
 
         let AST = {
             type: 'javascript',
             body: []
         };
 
-        while (this.ast.body.length) {
-            let node = this.ast.body.shift();
+        while (ast.body.length) {
+            let node = ast.body.shift();
 
             if (node.type === 'CallExpression') {
 
@@ -41,5 +39,5 @@ export default function Transformer(ast) {
         return AST;
     };
 
-    return this.generateJSAST();
+    return generateJSAST();
 }
