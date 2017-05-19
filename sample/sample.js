@@ -6,5 +6,11 @@ fs.readFile('./sample.ping', 'utf8', function (error, data) {
         return console.log(error);
     }
 
-    console.log(Ping.compile(data));
+    fs.writeFile("output.js", JSON.stringify(Ping.compile(data)), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log('Output saved!')
+    })
 });
