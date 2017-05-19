@@ -14,7 +14,7 @@ export default function Parser(tokens) {
             return args.reduce((result, arg, index, arr) => {
                 if (arg === '"') {
                     return {
-                        value: result.value + '"',
+                        value: `${result.value}"`,
                         open_quotes: true
                     };
                 } else if (result.open_quotes && arr[index + 1] === '"') {
@@ -41,7 +41,7 @@ export default function Parser(tokens) {
             let args = [];
 
             if (token.type !== 'double_quotes') {
-                throw new Error('Only strings and numbers are supported by "' + keyword + '" method!');
+                throw new Error(`Only strings and numbers are supported by "${keyword}" method!'`);
             }
 
             token = this.tokens.shift();
@@ -70,9 +70,9 @@ export default function Parser(tokens) {
                         arguments: findStringArguments(token.value)
                     };
 
-                    AST.body.push(expression)
+                    AST.body.push(expression);
                 } else {
-                    throw new Error('Unsupported keyword "' + token.value + '"');
+                    throw new Error(`Unsupported keyword "${token.value}"`);
                 }
             } else if (token.type === 'comment') {
                 let expression = {
@@ -85,7 +85,7 @@ export default function Parser(tokens) {
             } else if (token.type === 'new_line') {
                 // ignore
             } else {
-                throw new Error('Unsupported token "' + token.value + '"');
+                throw new Error(`Unsupported token "${token.value}"`);
             }
         }
 

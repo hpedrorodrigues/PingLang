@@ -3,9 +3,8 @@ export default function Generator(ast) {
     this.ast = ast;
 
     this.traverseAST = () => {
-        const createCallExpression = (object, method, args) => object + '.' + method + '(' + args + ');';
-
-        const createCommentExpression = (args) => '// ' + args;
+        const createCallExpression = (object, method, args) => `${object}.${method}(${args});`;
+        const createCommentExpression = (args) => `// ${args}`;
 
         let text = '';
 
@@ -16,7 +15,7 @@ export default function Generator(ast) {
 
                 if (node.attr.label === 'log') {
                     if (isNaN(node.arguments)) {
-                        text += createCallExpression('console', 'log', '"' + node.arguments + '"');
+                        text += createCallExpression('console', 'log', `"${node.arguments}"`);
                     } else {
                         text += createCallExpression('console', 'log', node.arguments);
                     }

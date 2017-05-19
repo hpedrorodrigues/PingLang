@@ -16,7 +16,7 @@ export default function Lexer(code) {
     };
 
     this._getTokens = () => {
-        const prepare = (key) => ' ' + key + ' ';
+        const prepare = (key) => ` ${key} `;
 
         return this.code
             .replace(/[\n\r]/g, prepare(this.langTokens.special.NEW_LINE))
@@ -51,7 +51,7 @@ export default function Lexer(code) {
                 } else if (typeof token === 'string' || token instanceof String || token !== '') {
                     tokens.push({type: 'word', value: token});
                 } else {
-                    throw new Error('Unexpected token "' + token + '"');
+                    throw new Error(`Unexpected token "${token}"`);
                 }
             } else {
                 tokens.push({type: 'number', value: token})
