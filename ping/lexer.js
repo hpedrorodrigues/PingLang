@@ -48,7 +48,7 @@ export default function Lexer(code) {
                 } else if (typeof token === 'string' || token instanceof String || token !== '') {
                     tokens.push({type: 'word', value: token});
                 } else {
-                    tokens.push({type: 'unknown', value: token});
+                    throw new Error('Unexpected token "' + token + '"');
                 }
             } else {
                 tokens.push({type: 'number', value: token})
