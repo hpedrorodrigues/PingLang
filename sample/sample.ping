@@ -1,16 +1,13 @@
-# Teste HUES
-show "A B"
-show "C D"
-show "E F"
-# Teste HUES
-show "A B"
-# Teste HUES
-show "A B"
-# Teste HUES
-show "A B"
-# Teste HUES
-show "A B"
-# Teste HUES
-show "A B"
-# Teste HUES
-show "A B"
+# Just a comment 1
+show "Simple Message 1"
+
+# Just a comment 2
+show "Simple Message 2"
+
+# Just a comment 3
+# Just a comment 4
+show "Simple Message 3"
+show "Simple Message 4"
+
+show "Simple Message 5"
+# Just a comment 5

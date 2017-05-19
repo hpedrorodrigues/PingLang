@@ -15,7 +15,7 @@ export default function Lexer(code) {
         }
     };
 
-    this._getInitialTokens = function () {
+    this._getTokens = function () {
         const prepare = (key) => {
             return ' ' + key + ' ';
         };
@@ -30,10 +30,11 @@ export default function Lexer(code) {
     };
 
     this.tokenizer = function () {
-        const _tokens = this._getInitialTokens(), tokens = [];
+        const _tokens = this._getTokens(), tokens = [];
 
         for (let i = 0; i < _tokens.length; i++) {
             const token = _tokens[i];
+
             if (token.length <= 0) {
                 // ignore
             } else if (isNaN(token)) {

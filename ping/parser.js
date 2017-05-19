@@ -6,7 +6,7 @@ export default function Parser(tokens) {
         const findCommentArguments = () => {
             let token = this.tokens.shift(), args = [];
 
-            while (token.type !== 'new_line') {
+            while (token && token.type !== 'new_line') {
                 args.push(token.value);
                 token = this.tokens.shift();
             }
