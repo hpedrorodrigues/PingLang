@@ -1,16 +1,16 @@
 import Ping from '../ping/compiler';
 const fs = require('fs');
+const path = require('path');
 
 fs.readFile('./sample.ping', 'utf8', function (error, data) {
     if (error) {
         return console.log(error);
     }
 
-    fs.writeFile("output.js", JSON.stringify(Ping.compile(data)), function (err) {
-        if (err) {
-            return console.log(err);
-        }
+    let dirname = './result';
+    if (!fs.existsSync(dirname)) {
+        fs.mkdirSync(dirname);
+    }
 
-        console.log('Output saved!')
-    })
+    fs.writeFileSync('result/result.js', Ping.compile(data));
 });

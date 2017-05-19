@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup ping/compiler.js --name ping --format umd --output dist/ping.js",
     "build-sample": "rollup sample/sample.js --name sample --format umd --output dist/sample.js; cp sample/sample.ping dist/",
-    "sample": "npm run build-sample && cd dist && node sample.js && cd .."
+    "clean": "rm -rf ./dist",
+    "sample": "npm run clean && npm run build-sample && cd dist && node sample.js && cd .."
   },
   "repository": {
     "type": "git",
