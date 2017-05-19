@@ -2,7 +2,7 @@
 
 A very small language project to help me to learn more about Abstract Syntax Tree.
 
-**This compiler is WIP**
+**This compiler is WIP**.
 
 ## Supported keywords
 
@@ -10,7 +10,7 @@ List of commands supported and planning to implement:
 
 - [x] `show`: Just prints a message in your `stdout`
 - [ ] `#`: Add a comment to your code
-- [ ] `def`: adds a variable
+- [ ] `def`: Add a variable
 
 ## Usage
 
