@@ -11,14 +11,20 @@ export default function Parser(tokens) {
                 token = this.tokens.shift();
             }
 
-            return args;
+            return args.join(' ');
         };
 
         const findStringArguments = (keyword) => {
-            let token = this.tokens.shift(), args = [];
+            let token = this.tokens.shift();
+
+            if (token.type === 'number') {
+                return token.value;
+            }
+
+            let args = [];
 
             if (token.type !== 'double_quotes') {
-                throw new Error('Only strings are supported by "' + keyword + '" method!');
+                throw new Error('Only strings and numbers are supported by "' + keyword + '" method!');
             }
 
             token = this.tokens.shift();
@@ -28,7 +34,7 @@ export default function Parser(tokens) {
                 token = this.tokens.shift();
             }
 
-            return args;
+            return args.join(' ');
         };
 
         let AST = {

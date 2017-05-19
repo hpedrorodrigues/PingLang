@@ -4,7 +4,7 @@ export default function Generator(ast) {
 
     this.traverseAST = function () {
         const createCallExpression = (object, method, args) => {
-            return object + '.' + method + '(\"' + args + '\");';
+            return object + '.' + method + '(' + args + ');';
         };
 
         const createCommentExpression = (args) => {
@@ -19,7 +19,11 @@ export default function Generator(ast) {
             if (node.attr.type === 'log') {
 
                 if (node.attr.label === 'log') {
-                    text += createCallExpression('console', 'log', node.arguments);
+                    if (isNaN(node.arguments)) {
+                        text += createCallExpression('console', 'log', '"' + node.arguments + '"');
+                    } else {
+                        text += createCallExpression('console', 'log', node.arguments);
+                    }
                 }
             } else if (node.attr.type === 'comment') {
                 text += createCommentExpression(node.arguments);

@@ -20,7 +20,7 @@ export default function Transformer(ast) {
                             type: 'log',
                             label: 'log'
                         },
-                        arguments: node.arguments.join(' ')
+                        arguments: node.arguments
                     };
 
                     AST.body.push(newNode);
@@ -31,7 +31,7 @@ export default function Transformer(ast) {
                         type: 'comment',
                         label: 'one_line'
                     },
-                    arguments: node.arguments.join(' ')
+                    arguments: node.arguments
                 };
 
                 AST.body.push(newNode);
