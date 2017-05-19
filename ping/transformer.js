@@ -17,14 +17,24 @@ export default function Transformer(ast) {
                 if (node.name === 'print') {
                     let newNode = {
                         attr: {
-                            object: 'console',
-                            method: 'log'
+                            type: 'log',
+                            label: 'log'
                         },
                         arguments: node.arguments.join(' ')
                     };
 
                     AST.body.push(newNode);
                 }
+            } else if (node.type === 'CommentExpression') {
+                let newNode = {
+                    attr: {
+                        type: 'comment',
+                        label: 'one_line'
+                    },
+                    arguments: node.arguments.join(' ')
+                };
+
+                AST.body.push(newNode);
             }
         }
 

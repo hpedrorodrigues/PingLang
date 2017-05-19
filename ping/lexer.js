@@ -7,7 +7,8 @@ export default function Lexer(code) {
             NEW_LINE: '*nl*',
             LEFT_PARENTHESIS: '*lp*',
             RIGHT_PARENTHESIS: '*rp*',
-            DOUBLE_QUOTES: '*dq*'
+            DOUBLE_QUOTES: '*dq*',
+            COMMENT: '*c*'
         },
         keywords: {
             PRINT: 'show'
@@ -24,6 +25,7 @@ export default function Lexer(code) {
             .replace(/\(/g, prepare(this.langTokens.special.LEFT_PARENTHESIS))
             .replace(/\)/g, prepare(this.langTokens.special.RIGHT_PARENTHESIS))
             .replace(/\"/g, prepare(this.langTokens.special.DOUBLE_QUOTES))
+            .replace(/#/g, prepare(this.langTokens.special.COMMENT))
             .split(/[\t\f\v ]+/);
     };
 
@@ -43,6 +45,8 @@ export default function Lexer(code) {
                     tokens.push({type: 'right_parenthesis'});
                 } else if (token === this.langTokens.special.DOUBLE_QUOTES) {
                     tokens.push({type: 'double_quotes'});
+                } else if (token === this.langTokens.special.COMMENT) {
+                    tokens.push({type: 'comment'});
                 } else if (token === this.langTokens.keywords.PRINT) {
                     tokens.push({type: 'keyword', value: 'print'});
                 } else if (typeof token === 'string' || token instanceof String || token !== '') {

@@ -11,7 +11,7 @@ A example of this language specification can be found [here](./sample/sample.pin
 List of commands supported and planning to implement:
 
 - [x] `show`: Just prints a message in your `stdout`
-- [ ] `#`: Add a comment to your code
+- [x] `#`: Add a comment to your code
 - [ ] `def`: Add a variable
 
 ## Usage

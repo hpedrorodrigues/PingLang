@@ -3,6 +3,17 @@ export default function Parser(tokens) {
     this.tokens = tokens;
 
     this.generateAST = function () {
+        const findCommentArguments = () => {
+            let token = this.tokens.shift(), args = [];
+
+            while (token.type !== 'new_line') {
+                args.push(token.value);
+                token = this.tokens.shift();
+            }
+
+            return args;
+        };
+
         const findStringArguments = (keyword) => {
             let token = this.tokens.shift(), args = [];
 
@@ -40,6 +51,18 @@ export default function Parser(tokens) {
                 } else {
                     throw new Error('Unsupported keyword "' + token.value + '"');
                 }
+            } else if (token.type === 'comment') {
+                let expression = {
+                    type: 'CommentExpression',
+                    name: '#',
+                    arguments: findCommentArguments()
+                };
+
+                AST.body.push(expression)
+            } else if (token.type === 'new_line') {
+                // ignore
+            } else {
+                throw new Error('Unsupported token "' + token.value + '"');
             }
         }
 

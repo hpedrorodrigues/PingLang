@@ -7,16 +7,22 @@ export default function Generator(ast) {
             return object + '.' + method + '(\"' + args + '\");';
         };
 
+        const createCommentExpression = (args) => {
+            return '// ' + args;
+        };
+
         let text = '';
 
         while (this.ast.body.length) {
             let node = this.ast.body.shift();
 
-            if (node.attr.object === 'console') {
+            if (node.attr.type === 'log') {
 
-                if (node.attr.method === 'log') {
-                    text += createCallExpression(node.attr.object, node.attr.method, node.arguments);
+                if (node.attr.label === 'log') {
+                    text += createCallExpression('console', 'log', node.arguments);
                 }
+            } else if (node.attr.type === 'comment') {
+                text += createCommentExpression(node.arguments);
             }
 
             text += '\n';
