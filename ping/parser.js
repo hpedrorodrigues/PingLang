@@ -11,20 +11,11 @@ export default function Parser(tokens) {
 
             return args.reduce((result, arg, index, arr) => {
                 if (arg === '"') {
-                    return {
-                        value: `${result.value}"`,
-                        open_quotes: true
-                    };
+                    return {value: `${result.value}"`, open_quotes: true};
                 } else if (result.open_quotes && arr[index + 1] === '"') {
-                    return {
-                        value: result.value + arg,
-                        open_quotes: false
-                    };
+                    return {value: result.value + arg, open_quotes: false};
                 } else {
-                    return {
-                        value: result.value + arg + " ",
-                        open_quotes: result.open_quotes
-                    };
+                    return {value: result.value + arg + " ", open_quotes: result.open_quotes};
                 }
             }, {value: ''}).value;
         };
