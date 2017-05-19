@@ -1,0 +1,31 @@
+{
+  "name": "ping",
+  "version": "1.0.0",
+  "description": "A small compiler",
+  "main": "ping.js",
+  "scripts": {
+    "build": "rollup ping/compiler.js --name ping --format umd --output dist/ping.js",
+    "build-sample": "rollup sample/sample.js --name sample --format umd --output dist/sample.js; cp sample/sample.ping dist/",
+    "sample": "npm run build-sample && cd dist && node sample.js && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpedrorodrigues/PingLang.git"
+  },
+  "keywords": [
+    "ping",
+    "compiler",
+    "lexer",
+    "generator",
+    "ast"
+  ],
+  "author": "Pedro Rodrigues",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hpedrorodrigues/PingLang/issues"
+  },
+  "homepage": "https://github.com/hpedrorodrigues/PingLang#readme",
+  "dependencies": {
+    "rollup": "^0.41.6"
+  }
+}

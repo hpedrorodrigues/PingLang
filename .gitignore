@@ -1,0 +1,10 @@
+# Folder
+
+.idea
+node_modules
+dist
+
+# File
+
+*.iml
+ping.js
