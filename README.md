@@ -20,9 +20,9 @@ List of commands supported and planning to implement:
 
 ```javascript
 var Ping = require('ping')
-var code = 'show "just a message"';
+var code = 'show "just a message" # Just a comment';
 
-console.log(JSON.stringify(Ping.compile(code)));
+console.log(Ping.compile(code));
 ```
 
 ### Browser
